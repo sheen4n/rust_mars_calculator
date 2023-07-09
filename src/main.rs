@@ -1,12 +1,24 @@
 use std::io;
 
 fn main() {
-    let mut input = String::new();
+    let a = 5;
+    // the ownership is not transferred as primitives can be copied
+    let b = a;
+
+
+    // this String on the heap belongs to the variable input (variable input is the owner)
+    let mut input: String = String::new();
+    // s takes over pointer to String::new() as new owner... so input can no longer be owner (borrowed)
+    let mut s = input;
     io::stdin().read_line(&mut input);
 
     let mut mars_weight: f32 = calculate_weight_on_mars(100.0);
     mars_weight = mars_weight * 1000.0;
     println!("Weight on Mars: {}g", mars_weight);
+
+    // When this scope exits, the value of input is deallocated
+
+    // Double free (error occurs in other languages as resources are being attempted to free twice)
 }
 
 fn calculate_weight_on_mars(weight: f32) -> f32 {
