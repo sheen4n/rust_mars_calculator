@@ -3,7 +3,7 @@ use std::io;
 fn main() {
     // this String on the heap belongs to the variable input (variable input is the owner)
     let mut input: String = String::new();
-    let s1 = &input;
+    let mut s1 = &mut input;
     let s2 = &input;
     println!("{} {}", s1, s2);
     // s takes over pointer to String::new() as new owner... so input can no longer be owner (borrowed)
