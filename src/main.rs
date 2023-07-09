@@ -1,26 +1,17 @@
 use std::io;
 
 fn main() {
-    // this String on the heap belongs to the variable input (variable input is the owner)
     let mut input: String = String::new();
-    let mut s1 = &mut input;
+    
+    // you can have immutable references, if you do not use them after being mutated.
+    let s1 = &input;
     let s2 = &input;
-    println!("{} {}", s1, s2);
-    // s takes over pointer to String::new() as new owner... so input can no longer be owner (borrowed)
-    // let mut s = input;
-    some_fn(&mut input);
-
-
-    // not allowed to use input as ownership of pointer transferred to s in some_fn
+    
     io::stdin().read_line(&mut input);
-
+    // you cannot use immutable references after mutation.
+    println!("{} {}", s1, s2);
     let mut mars_weight: f32 = calculate_weight_on_mars(100.0);
-    mars_weight = mars_weight * 1000.0;
-    println!("Weight on Mars: {}g", mars_weight);
-
-    // When this scope exits, the value of input is deallocated
-
-    // Double free (error occurs in other languages as resources are being attempted to free twice)
+    println!("Weight on Mars: {}kg", mars_weight);
 }
 
 fn calculate_weight_on_mars(weight: f32) -> f32 {
