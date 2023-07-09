@@ -3,14 +3,9 @@ use std::io;
 fn main() {
     let mut input: String = String::new();
     
-    // you can have immutable references, if you do not use them after being mutated.
-    let s1 = &input;
-    let s2 = &input;
-    
     io::stdin().read_line(&mut input);
-    // you cannot use immutable references after mutation.
-    println!("{} {}", s1, s2);
-    let mut mars_weight: f32 = calculate_weight_on_mars(100.0);
+    println!("Input: {}", input);
+    let mars_weight: f32 = calculate_weight_on_mars(100.0);
     println!("Weight on Mars: {}kg", mars_weight);
 }
 
@@ -19,9 +14,6 @@ fn calculate_weight_on_mars(weight: f32) -> f32 {
 }
 
 // passing references as parameter means borrowing, ownership not transferred
-fn some_fn(s: &mut String) {
-    s.push_str("a");
-}
 
 // Ownership Rules
 // 1. Each value in Rust is owned by a variable
