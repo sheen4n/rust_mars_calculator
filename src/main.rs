@@ -5,7 +5,7 @@ fn main() {
     let mut input: String = String::new();
     // s takes over pointer to String::new() as new owner... so input can no longer be owner (borrowed)
     // let mut s = input;
-    some_fn(input);
+    some_fn(&input);
     // not allowed to use input as ownership of pointer transferred to s in some_fn
     io::stdin().read_line(&mut input);
 
@@ -22,8 +22,9 @@ fn calculate_weight_on_mars(weight: f32) -> f32 {
     (weight / 9.81) * 3.711
 }
 
-fn some_fn(s: String) {
-
+// passing references as parameter means borrowing, ownership not transferred
+fn some_fn(s: &String) {
+    s.push_str("a");
 }
 
 // Ownership Rules
