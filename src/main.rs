@@ -1,15 +1,12 @@
 use std::io;
 
 fn main() {
-    let a = 5;
-    // the ownership is not transferred as primitives can be copied
-    let b = a;
-
-
     // this String on the heap belongs to the variable input (variable input is the owner)
     let mut input: String = String::new();
     // s takes over pointer to String::new() as new owner... so input can no longer be owner (borrowed)
-    let mut s = input;
+    // let mut s = input;
+    some_fn(input);
+    // not allowed to use input as ownership of pointer transferred to s in some_fn
     io::stdin().read_line(&mut input);
 
     let mut mars_weight: f32 = calculate_weight_on_mars(100.0);
@@ -23,6 +20,10 @@ fn main() {
 
 fn calculate_weight_on_mars(weight: f32) -> f32 {
     (weight / 9.81) * 3.711
+}
+
+fn some_fn(s: String) {
+
 }
 
 // Ownership Rules
