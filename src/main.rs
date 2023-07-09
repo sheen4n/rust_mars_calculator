@@ -3,9 +3,14 @@ use std::io;
 fn main() {
     // this String on the heap belongs to the variable input (variable input is the owner)
     let mut input: String = String::new();
+    let s1 = &input;
+    let s2 = &input;
+    println!("{} {}", s1, s2);
     // s takes over pointer to String::new() as new owner... so input can no longer be owner (borrowed)
     // let mut s = input;
     some_fn(&mut input);
+
+
     // not allowed to use input as ownership of pointer transferred to s in some_fn
     io::stdin().read_line(&mut input);
 
@@ -31,3 +36,7 @@ fn some_fn(s: &mut String) {
 // 1. Each value in Rust is owned by a variable
 // 2. When the owner goes out of scope, the value will be deallocated.
 // 3. There can only be ONE owner at a time.
+
+
+// Borrowing Rules
+// 1. You can have only 1 mutable borrows, or many immutable borrows at the same time
